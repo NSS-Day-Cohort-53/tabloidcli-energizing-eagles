@@ -43,7 +43,9 @@ namespace TabloidCLI
 
         public Tag Get(int id)
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
+
+
 
         }
         public void Insert(Tag tag)
@@ -66,16 +68,7 @@ namespace TabloidCLI
 
         public void Update(Tag tag)
         {
-            using (SqlConnection conn = Connection)
-            {
-                conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
-                {
-
-                    cmd.CommandText = @"UPDATE Tag ";
-                }
-
-            }
+            throw new NotImplementedException();
         }
 
         public void Delete(int id)

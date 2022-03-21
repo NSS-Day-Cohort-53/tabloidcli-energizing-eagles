@@ -70,8 +70,9 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Add()
         {
-            Console.WriteLine("New Tag");
+            Console.WriteLine("Insert new tag name");
             Tag tag = new Tag();
+            tag.Name = Console.ReadLine();
             _tagRepository.Insert(tag);
 
         }
