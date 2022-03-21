@@ -14,7 +14,7 @@ namespace TabloidCLI
         {
             using (SqlConnection conn = Connection)
             {
-                // cant display a list of authors due to the login in failing
+                
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {

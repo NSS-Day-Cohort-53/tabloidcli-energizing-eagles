@@ -20,7 +20,7 @@ namespace TabloidCLI.UserInterfaceManagers
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Author Menu");
-            //added a database where we can list all the authors 
+            
             Console.WriteLine(" 1) List Authors");
             Console.WriteLine(" 2) Author Details");
             Console.WriteLine(" 3) Add Author");
@@ -34,7 +34,7 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 case "1":
                     List();
-                    // return this
+                    
                     return this;
                 case "2":
                     Author author = Choose();
