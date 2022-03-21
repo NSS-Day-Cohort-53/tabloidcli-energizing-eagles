@@ -14,5 +14,10 @@ namespace TabloidCLI.Models
         {
             return $"{Title} ({Url})";
         }
+
+        public void AddToFaves()
+        {
+
+        }
     }
 }
