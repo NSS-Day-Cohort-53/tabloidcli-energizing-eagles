@@ -8,12 +8,14 @@ namespace TabloidCLI.UserInterfaceManagers
         private IUserInterfaceManager _parentUI;
         private TagRepository _tagRepository;
 
+        // constructor for this class
         public SearchManager(IUserInterfaceManager parentUI, string connectionString)
         {
             _parentUI = parentUI;
             _tagRepository = new TagRepository(connectionString);
         }
 
+        // runs menu and options / Incomplete need to add to switch
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Search Menu");
@@ -43,7 +45,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     return this;
             }
         }
-
+        // presumably this lets you pick a tag returns a list of authors with that tag and then shows you that list
         private void SearchAuthors()
         {
             Console.Write("Tag> ");
