@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using TabloidCLI.Models;
 
 namespace TabloidCLI.UserInterfaceManagers
 {
@@ -6,11 +8,16 @@ namespace TabloidCLI.UserInterfaceManagers
     {
         // private field read only  of the interface type
         private readonly IUserInterfaceManager _parentUI;
+        private TagRepository _tagRepository;
+        private string _connectionString;
+
 
         // sets the previously mentioned field
         public TagManager(IUserInterfaceManager parentUI, string connectionString)
         {
             _parentUI = parentUI;
+            _tagRepository = new TagRepository(connectionString);
+            _connectionString = connectionString;
         }
         // displays and runs menu for the tags // needs to be worked on switch empty
         public IUserInterfaceManager Execute()
@@ -46,9 +53,19 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
         // needs to be worked on
+       
         private void List()
         {
-            throw new NotImplementedException();
+            //need to list all the tags
+            // had to make a list of all the tags
+            List<Tag> tags = _tagRepository.GetAll();
+            //display all the tags using a foreach loop.
+            foreach (Tag tag in tags)
+            {
+                Console.WriteLine(tag);
+            }
+
+
         }
 
         private void Add()
