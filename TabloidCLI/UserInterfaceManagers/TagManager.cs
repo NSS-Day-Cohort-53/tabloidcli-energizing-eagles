@@ -4,13 +4,15 @@ namespace TabloidCLI.UserInterfaceManagers
 {
     public class TagManager : IUserInterfaceManager
     {
+        // private field read only  of the interface type
         private readonly IUserInterfaceManager _parentUI;
 
+        // sets the previously mentioned field
         public TagManager(IUserInterfaceManager parentUI, string connectionString)
         {
             _parentUI = parentUI;
         }
-
+        // displays and runs menu for the tags // needs to be worked on switch empty
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Tag Menu");
@@ -43,7 +45,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     return this;
             }
         }
-
+        // needs to be worked on
         private void List()
         {
             throw new NotImplementedException();
