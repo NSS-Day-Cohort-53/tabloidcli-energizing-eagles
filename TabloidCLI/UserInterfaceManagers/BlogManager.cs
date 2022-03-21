@@ -13,13 +13,39 @@ namespace TabloidCLI.UserInterfaceManagers
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Blog Menu");
-            Console.WriteLine(" 1) Add Blog");
-            Console.WriteLine(" 4) View Blogs");
-            Console.WriteLine(" 5) Remove Blog");
-            Console.WriteLine(" 5) Edit Blog");
+            Console.WriteLine(" 1) Add Blog to faves");
+            Console.WriteLine(" 2) View Blogs");
+            Console.WriteLine(" 3) Remove Blog");
+            Console.WriteLine(" 4) Edit Blog");
             Console.WriteLine(" 0) Go Back");
 
+            int menuOp = int.Parse(Console.ReadLine());
+
+            switch (menuOp)
+            {
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 0:
+
+                    break;
+            }
+
             return this;
+        }
+
+        private void AddToDB()
+        {
+            Console.WriteLine("What is the blog's title? ");
         }
 
     }

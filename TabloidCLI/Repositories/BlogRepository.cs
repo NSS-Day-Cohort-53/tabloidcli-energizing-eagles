@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TabloidCLI.Repositories
 {
+
     public class BlogRepository
     {
         public string Title { set; get; }
