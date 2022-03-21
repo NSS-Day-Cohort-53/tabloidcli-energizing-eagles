@@ -22,13 +22,13 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("> ");
             string choice = Console.ReadLine();
             switch (choice)
-            {//case 1 doesnt work or display new options
+            {
                 //Journal Management
-                // there is no jornal manager .cs 
-                case "1": throw new NotImplementedException();
+                case "1": return new JournalManager(this, CONNECTION_STRING);
                 //case 2 doenst work or display any new options
                 //Blog Management
-                case "2": throw new NotImplementedException();
+                case "2":
+                    return new BlogManager(this, CONNECTION_STRING);
                     // author manager
                 case "3": return new AuthorManager(this, CONNECTION_STRING);
                 //case 4 doesnt work!
