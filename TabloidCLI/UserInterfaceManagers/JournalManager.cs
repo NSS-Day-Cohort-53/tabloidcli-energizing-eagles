@@ -67,10 +67,12 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Journal> journals = _journalRepository.GetAll();
+            Console.WriteLine("----------------------------");
             foreach (Journal journal in journals)
             {
                 Console.WriteLine($"{journal.Id}.) {journal.Title}");
             }
+            Console.WriteLine("----------------------------");
         }
 
         private Journal Choose(string prompt = null)
