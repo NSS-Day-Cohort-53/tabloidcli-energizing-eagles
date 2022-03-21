@@ -5,6 +5,8 @@ using TabloidCLI.Models;
 using TabloidCLI.Repositories;
 using TabloidCLI.UserInterfaceManagers;
 
+
+
 namespace TabloidCLI
 {
     public class TagRepository : DatabaseConnector, IRepository<Tag>
@@ -43,7 +45,6 @@ namespace TabloidCLI
         {
             throw new NotImplementedException();
         }
-
         public void Insert(Tag tag)
         {
             throw new NotImplementedException();
