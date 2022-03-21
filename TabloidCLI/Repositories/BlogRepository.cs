@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace TabloidCLI.Repositories
 {
-
-    public class BlogRepository
+    public class BlogRepository: DatabaseConnector
     {
         public string Title { set; get; }
         public string Url { get; set; }
+
+        public BlogRepository(string connectionString) : base(connectionString) { }
+        
     }
 }
