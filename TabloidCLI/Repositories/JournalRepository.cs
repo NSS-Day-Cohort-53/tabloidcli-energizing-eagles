@@ -93,9 +93,25 @@ namespace TabloidCLI.Repositories
                 }
             }
         }
-        public void Update(Journal entry)
+        public void Update(Journal journal)
         {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Room
+                                        SET Title = @title,
+                                            Content = @content,
+                                            CreateDateTime = @createDateTime
+                                        WHERE @id = Id";
+                    cmd.Parameters.AddWithValue("@title", journal.Title);
+                    cmd.Parameters.AddWithValue("@content", journal.Content);
+                    cmd.Parameters.AddWithValue("@createDateTime", journal.CreateDateTime);
 
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
         public void Delete(int id)
         {
