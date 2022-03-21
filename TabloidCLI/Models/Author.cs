@@ -2,6 +2,7 @@
 
 namespace TabloidCLI.Models
 {
+    //inheriting
     public class Author
     {
         public int Id { get; set; }

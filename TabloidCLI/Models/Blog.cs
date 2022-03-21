@@ -2,6 +2,7 @@
 
 namespace TabloidCLI.Models
 {
+    //inheriting
     public class Blog
     {
         public int Id { get; set; }
