@@ -8,13 +8,15 @@ using TabloidCLI.Models;
 
 namespace TabloidCLI.UserInterfaceManagers
 {
-    internal class BlogManager: BlogRepository, IUserInterfaceManager
+    public class BlogManager: IUserInterfaceManager
     {
-
-        public BlogManager(IUserInterfaceManager parentUI, string connectionString)
+        private readonly IUserInterfaceManager _parentUI;
+        private BlogRepository _blogRepository;
+        private string _connectionString;
+        public BlogManager(IUserInterfaceManager parentUI, string connectionString) 
         {
             _parentUI = parentUI;
-            _authorRepository = new AuthorRepository(connectionString);
+            _blogRepository = new BlogRepository(connectionString);
             _connectionString = connectionString;
         }
 
@@ -33,7 +35,7 @@ namespace TabloidCLI.UserInterfaceManagers
             switch (menuOp)
             {
                 case 1:
-
+                    AddToDB();
                     break;
                 case 2:
 
@@ -62,7 +64,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine("whats the url? ");
             blog.Url = Console.ReadLine();
 
-
+            _blogRepository.insert(blog);
         }
 
     }
