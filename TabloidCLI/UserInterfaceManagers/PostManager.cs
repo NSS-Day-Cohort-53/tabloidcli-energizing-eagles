@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TabloidCLI.Repositories;
+using TabloidCLI.Models;
 
 namespace TabloidCLI.UserInterfaceManagers
 {
@@ -21,10 +22,11 @@ namespace TabloidCLI.UserInterfaceManagers
             _postRepository = new PostRepository(connectionString);
             _connectionString = connectionString;
         }
-        // displays and runs menu for the tags // needs to be worked on switch empty
+        // displays and runs menu for the posts // needs to be worked on switch empty
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Post Menu");
+
             Console.WriteLine(" 1) List Posts");
             Console.WriteLine(" 2) Add Post");
             Console.WriteLine(" 3) Edit Post");
@@ -61,7 +63,11 @@ namespace TabloidCLI.UserInterfaceManagers
         // needs to be worked on
         private void List()
         {
-            throw new NotImplementedException();
+            List<Post> posts = _postRepository.GetAll();
+            foreach (Post post in posts)
+            {
+                Console.WriteLine($"{post.Title}: {post.Url}");
+            }
         }
 
         private void Add()
