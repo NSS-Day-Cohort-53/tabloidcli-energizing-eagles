@@ -65,6 +65,19 @@ namespace TabloidCLI.Repositories
                 }
             }
         }
+
+        public void Delete(int id)
+        {
+            using (SqlConnection connection = Connection)
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM Blog where Id = @id";
+                }
+            }
+        }
         
     }
 }
