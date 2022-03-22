@@ -41,7 +41,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Show();
                     break;
                 case 3:
-
+                    DeleteById();
                     break;
                 case 4:
 
@@ -69,8 +69,18 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Show()
         {
-            _blogRepository.GetAll();
+           foreach(Blog blog in _blogRepository.GetAll())
+            {
+                Console.WriteLine($"{blog.Id}:  {blog.Title} has a url of {blog.Url}");
+            }
         }
 
+        private void DeleteById()
+        {
+            Show();
+            Console.WriteLine($"Which Blog do you want to delete ");
+            int blogChoice = int.Parse(Console.ReadLine());
+            _blogRepository.Delete(blogChoice);
+        }
     }
 }

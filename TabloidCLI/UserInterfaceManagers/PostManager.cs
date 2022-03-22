@@ -15,6 +15,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private PostRepository _postRepository;
         private AuthorRepository _authorRepository;
         private BlogRepository _blogRepository;
+        private NoteRepository _noteRepository;
         private string _connectionString;
 
         // sets the previously mentioned field
@@ -24,6 +25,7 @@ namespace TabloidCLI.UserInterfaceManagers
             _postRepository = new PostRepository(connectionString);
             _authorRepository = new AuthorRepository(connectionString);
             _blogRepository = new BlogRepository(connectionString);
+            _noteRepository = new NoteRepository(connectionString);
             _connectionString = connectionString;
         }
         // displays and runs menu for the posts // needs to be worked on switch empty
@@ -223,9 +225,36 @@ namespace TabloidCLI.UserInterfaceManagers
             throw new NotImplementedException();
         }
 
-        private void NoteManagement()
+        private IUserInterfaceManager NoteManagement()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Note Menu");
+            Console.WriteLine("1) List Notes");
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    ListNotes();
+                    return this;
+                default:
+                    Console.WriteLine("Invalid Selection");
+                    return this;
+
+
+
+            }
+            
+            
+                
+        }
+        private void ListNotes()
+        {
+
+            List<Note> notes = _noteRepository.GetAll();
+
+            foreach (Note note in notes)
+            {
+                Console.WriteLine($"Title:{note.Title}  created on {note.CreateDateTime} Content: {note.Content}");
+            }
         }
 
     }
