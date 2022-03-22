@@ -72,11 +72,17 @@ namespace TabloidCLI.UserInterfaceManagers
         private void ViewBlogPosts()
         {
             List<Post> posts = _postRepository.GetByAuthor(_authorId);
-            foreach (Post post in posts)
+            if (posts.Count > 0)
             {
-                Console.WriteLine(post);
+                foreach (Post post in posts)
+                {
+                    Console.WriteLine($"{post.Title} // {post.Url}");
+                }
             }
-            Console.WriteLine();
+            else 
+            { 
+                Console.WriteLine("This author has no posts yet!"); 
+            }
         }
 
         private void AddTag()
