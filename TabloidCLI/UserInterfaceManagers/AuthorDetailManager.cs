@@ -61,12 +61,18 @@ namespace TabloidCLI.UserInterfaceManagers
             Author author = _authorRepository.Get(_authorId);
             Console.WriteLine($"Name: {author.FullName}");
             Console.WriteLine($"Bio: {author.Bio}");
-            Console.WriteLine("Tags:");
-            foreach (Tag tag in author.Tags)
+            if (author.Tags.Count > 0)
             {
-                Console.WriteLine(" " + tag);
+                Console.WriteLine("Tags:");
+                foreach (Tag tag in author.Tags)
+                {
+                    Console.WriteLine(" " + tag);
+                }
             }
-            Console.WriteLine();
+            else
+            {
+                Console.WriteLine("This author has no tags yet!");
+            }
         }
 
         private void ViewBlogPosts()
@@ -76,7 +82,9 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 foreach (Post post in posts)
                 {
+                    Console.WriteLine("------------------------------------------------------------");
                     Console.WriteLine($"{post.Title} // {post.Url}");
+                    Console.WriteLine("------------------------------------------------------------");
                 }
             }
             else 
