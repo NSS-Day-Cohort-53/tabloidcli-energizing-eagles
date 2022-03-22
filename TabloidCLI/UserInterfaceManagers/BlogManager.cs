@@ -38,7 +38,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     AddToDB();
                     break;
                 case 2:
-
+                    Show();
                     break;
                 case 3:
 
@@ -65,6 +65,11 @@ namespace TabloidCLI.UserInterfaceManagers
             blog.Url = Console.ReadLine();
 
             _blogRepository.insert(blog);
+        }
+
+        private void Show()
+        {
+            _blogRepository.GetAll();
         }
 
     }
