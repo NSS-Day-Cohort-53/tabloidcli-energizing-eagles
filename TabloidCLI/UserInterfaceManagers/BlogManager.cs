@@ -134,7 +134,7 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 blogToEdit.Title = title;
             }
-            Console.Write("New last name (blank to leave unchanged: ");
+            Console.Write("New URL (blank to leave unchanged: ");
             string url = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(url))
             {
