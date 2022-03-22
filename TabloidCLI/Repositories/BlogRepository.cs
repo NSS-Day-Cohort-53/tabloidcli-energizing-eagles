@@ -75,6 +75,9 @@ namespace TabloidCLI.Repositories
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = @"DELETE FROM Blog where Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
