@@ -8,8 +8,10 @@ namespace TabloidCLI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome user!! We are so happy you are here!");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
 
+            Console.WriteLine("Welcome user!! We are so happy you are here!");
+            
             // MainMenuManager implements the IUserInterfaceManager interface
             IUserInterfaceManager ui = new MainMenuManager();
             while (ui != null)
