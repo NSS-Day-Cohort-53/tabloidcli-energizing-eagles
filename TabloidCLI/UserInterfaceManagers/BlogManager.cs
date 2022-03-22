@@ -44,7 +44,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     DeleteById();
                     break;
                 case 4:
-
+                    Edit();
                     break;
                 case 0:
 
@@ -81,6 +81,68 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine($"Which Blog do you want to delete ");
             int blogChoice = int.Parse(Console.ReadLine());
             _blogRepository.Delete(blogChoice);
+        }
+
+        private Blog Choose(string prompt = null)
+        {
+            if (prompt == null)
+            {
+                prompt = "Please choose a blog:";
+            }
+
+            Console.WriteLine(prompt);
+
+            List<Blog> blogs = _blogRepository.GetAll();
+
+            for (int i = 0; i < blogs.Count; i++)
+            {
+                Blog blog = blogs[i];
+                Console.WriteLine($" {i + 1}) {blog.Title}");
+            }
+            Console.Write("> ");
+
+            string input = Console.ReadLine();
+            try
+            {
+                int choice = int.Parse(input);
+                return blogs[choice - 1];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid Selection");
+                return null;
+            }
+        }
+
+        private void Edit()
+        {
+            /*Show();
+            Console.WriteLine("Which blog would you like to edit?");
+            int blogChoice = int.Parse(Console.ReadLine()); */
+
+
+            Blog blogToEdit = Choose("Which blog would you like to edit?");
+            if (blogToEdit == null)
+            {
+                return;
+            }
+
+            Console.WriteLine();
+            Console.Write("New Title (blank to leave unchanged: ");
+            string title = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                blogToEdit.Title = title;
+            }
+            Console.Write("New last name (blank to leave unchanged: ");
+            string url = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                blogToEdit.Url = url;
+            }
+            
+            _blogRepository.Update(blogToEdit.Id, blogToEdit.Title, blogToEdit.Url);
+
         }
     }
 }
