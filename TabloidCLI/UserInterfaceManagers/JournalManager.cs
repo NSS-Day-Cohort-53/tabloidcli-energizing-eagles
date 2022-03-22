@@ -26,7 +26,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 2) Journal Details");
             Console.WriteLine(" 3) Add Journal");
             Console.WriteLine(" 4) Remove Journal");
-            Console.WriteLine(" 5) Edit Author");
+            Console.WriteLine(" 5) Edit Journal");
             Console.WriteLine(" 0) Go Back");
 
             Console.Write("> ");
@@ -45,16 +45,20 @@ namespace TabloidCLI.UserInterfaceManagers
                     }
                     else
                     {
+                        Console.WriteLine("--------------------------------------------------------");
+                        Console.WriteLine(@$"{journal.Title} 
+{journal.Content}");
+                        Console.WriteLine("--------------------------------------------------------");
                         return new JournalManager(this, _connectionString);
                     }
                 case "3":
                     Add();
                     return this;
                 case "4":
-                    Edit();
+                    Remove();
                     return this;
                 case "5":
-                    Remove();
+                    Edit();
                     return this;
                 case "0":
                     return _parentUI;
@@ -79,7 +83,7 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             if (prompt == null)
             {
-                prompt = "Please choose an Author:";
+                prompt = "Please choose a Journal:";
             }
 
             Console.WriteLine(prompt);
@@ -131,13 +135,13 @@ namespace TabloidCLI.UserInterfaceManagers
             }
 
             Console.WriteLine();
-            Console.Write("New title (blank to leave unchanged: ");
+            Console.Write("New title (blank to leave unchanged): ");
             string title = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(title))
             {
                 journalToEdit.Title = title;
             }
-            Console.Write("New content (blank to leave unchanged: ");
+            Console.Write("New content (blank to leave unchanged): ");
             string content = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(content))
             {
