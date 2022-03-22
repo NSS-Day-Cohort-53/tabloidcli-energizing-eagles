@@ -24,20 +24,25 @@ namespace TabloidCLI.UserInterfaceManagers
             switch (choice)
             {
                 //Journal Management
-                case "1": return new JournalManager(this, CONNECTION_STRING);
+                case "1": 
+                    return new JournalManager(this, CONNECTION_STRING);
                 //case 2 doenst work or display any new options
                 //Blog Management
                 case "2":
                     return new BlogManager(this, CONNECTION_STRING);
                     // author manager
-                case "3": return new AuthorManager(this, CONNECTION_STRING);
+                case "3": 
+                    return new AuthorManager(this, CONNECTION_STRING);
                 //case 4 doesnt work!
                 //Post Management
-                case "4": throw new NotImplementedException();
+                case "4": 
+                    return new PostManager(this, CONNECTION_STRING);
                     // tag manager
-                case "5": return new TagManager(this, CONNECTION_STRING);
+                case "5": 
+                    return new TagManager(this, CONNECTION_STRING);
                     // search manager
-                case "6": return new SearchManager(this, CONNECTION_STRING);
+                case "6": 
+                    return new SearchManager(this, CONNECTION_STRING);
                 case "0":
                     Console.WriteLine("Good bye");
                     return null;

@@ -127,7 +127,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Journal journalToEdit = Choose("Which journal would you like to edit?");
             if (journalToEdit == null)
             {
-                return; 
+                return;
             }
 
             Console.WriteLine();
