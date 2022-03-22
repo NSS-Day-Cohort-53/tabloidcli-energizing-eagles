@@ -8,7 +8,7 @@ namespace TabloidCLI
     {
         static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            // Console.ForegroundColor = ConsoleColor.DarkBlue;
 
             Console.WriteLine("Welcome user!! We are so happy you are here!");
             

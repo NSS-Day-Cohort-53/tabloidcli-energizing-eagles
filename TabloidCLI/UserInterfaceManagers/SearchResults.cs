@@ -31,8 +31,10 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(Title);
 
             foreach (T result in _results)
-            {
+            {   
+                Console.WriteLine("-----------------------------------");
                 Console.WriteLine(" " + result);
+                Console.WriteLine("-----------------------------------");
             }
 
             Console.WriteLine();
