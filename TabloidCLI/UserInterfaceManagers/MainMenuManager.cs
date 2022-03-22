@@ -36,7 +36,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 //case 4 doesnt work!
                 //Post Management
                 case "4": 
-                    throw new NotImplementedException();
+                    return new PostManager(this, CONNECTION_STRING);
                     // tag manager
                 case "5": 
                     return new TagManager(this, CONNECTION_STRING);
