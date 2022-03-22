@@ -116,7 +116,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
 
             Console.WriteLine();
-            Console.Write("New  Name (blank to leave unchanged): ");
+            Console.Write("Changed name or leave it blank to not make any changes: ");
             string Name = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(Name))
             {

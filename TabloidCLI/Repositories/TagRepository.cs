@@ -74,7 +74,8 @@ namespace TabloidCLI
 
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "UPDATE Tag Set @name = Name WHERE Id = @id";
+                    cmd.CommandText = @"UPDATE Tag set Name=@name 
+                        where Id=@id";
                     cmd.Parameters.AddWithValue("@name", tag.Name);
                     cmd.Parameters.AddWithValue("@id", tag.Id);
                     cmd.ExecuteNonQuery();
