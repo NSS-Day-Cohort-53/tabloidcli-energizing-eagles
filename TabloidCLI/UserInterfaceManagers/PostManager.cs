@@ -189,7 +189,7 @@ namespace TabloidCLI.UserInterfaceManagers
             DateTime publishDate;
             do
             {
-                Console.Write("Publish Date: ");
+                Console.Write("Publish Date (example: 1/1/2000): ");
                 success = DateTime.TryParse(Console.ReadLine(), out publishDate);
             }
             while (!success);
