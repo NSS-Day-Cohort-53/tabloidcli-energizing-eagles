@@ -33,6 +33,38 @@ namespace TabloidCLI.Repositories
 
         }
 
+        public void GetAll()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Title, Url FROM Blog";
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        List<Blog> list = new List<Blog>();
+                        while (reader.Read())
+                        {
+                            int titleColumnPosition = reader.GetOrdinal("Title");
+                            string titleValue = reader.GetString(titleColumnPosition);
+
+                            int urlColumnPosition = reader.GetOrdinal("URL");
+                            string urlValue = reader.GetString(urlColumnPosition);
+
+                            list.Add(new Blog() { Title = titleValue, Url = urlValue });
+                        }
+
+                        foreach (Blog blog in list)
+                        {
+                            Console.WriteLine($"Title: {blog.Title}, URL: {blog.Url} ");
+                        }
+                    }
+                }
+            }
+        }
         
     }
 }
