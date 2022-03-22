@@ -81,6 +81,27 @@ namespace TabloidCLI.Repositories
                 }
             }
         }
+
+        public void Update(int id, string title, string url)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Blog
+                                      SET 
+                                      Title= @title,
+                                      Url = @url
+                                      WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@title", title);
+                    cmd.Parameters.AddWithValue("@url", url);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         
     }
 }
