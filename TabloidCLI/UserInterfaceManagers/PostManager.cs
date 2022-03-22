@@ -263,7 +263,28 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void AddNotes()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("what post you  like to put a note on!");
+            List<Post> posts = _postRepository.GetAll();
+            foreach (Post post in posts)
+            {
+                Console.WriteLine($"{post.Id}) {post.Title}");
+            }
+           int PostId=int.Parse(Console.ReadLine());
+
+
+            Console.WriteLine("Add a note to a post!");
+            Note n = new Note();
+
+            Console.Write("Title: ");
+            n.Title = Console.ReadLine();
+            n.CreateDateTime = DateTime.Now;
+            Console.Write("Content: ");
+            n.Content = Console.ReadLine();
+            n.PostId=PostId;
+           
+
+            _noteRepository.Insert(n);
+
         }
 
     }

@@ -54,9 +54,25 @@ namespace TabloidCLI.Repositories
 
      
 
-        public void Insert(Note entry)
+        public void Insert(Note note)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO Note(Title,Content,CreateDateTime,PostId)
+                        VALUES(@title,@content,@createDateTime,@postId)
+                        ";
+                    cmd.Parameters.AddWithValue("@title", note.Title);
+                    cmd.Parameters.AddWithValue("@content", note.Content);
+                    cmd.Parameters.AddWithValue("@createDateTime", note.CreateDateTime);
+                    cmd.Parameters.AddWithValue("@postId", note.PostId);
+                    cmd.ExecuteNonQuery();
+
+
+                }    
+            }
         }
 
         public void Update(Note entry)
