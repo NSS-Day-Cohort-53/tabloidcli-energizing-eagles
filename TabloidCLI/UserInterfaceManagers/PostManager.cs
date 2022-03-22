@@ -229,11 +229,15 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             Console.WriteLine("Note Menu");
             Console.WriteLine("1) List Notes");
+            Console.WriteLine("2) Add Note");
             string choice = Console.ReadLine();
             switch (choice)
             {
                 case "1":
                     ListNotes();
+                    return this;
+                case "2":
+                    AddNotes();
                     return this;
                 default:
                     Console.WriteLine("Invalid Selection");
@@ -255,6 +259,11 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine($"Title:{note.Title}  created on {note.CreateDateTime} Content: {note.Content}");
             }
+        }
+
+        private void AddNotes()
+        {
+            throw new NotImplementedException();
         }
 
     }
