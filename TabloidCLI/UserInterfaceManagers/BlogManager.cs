@@ -25,7 +25,9 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine("---------");
             Console.WriteLine("Blog Menu");
+            Console.WriteLine("---------");
             Console.WriteLine(" 1) Add Blog to faves");
             Console.WriteLine(" 2) View Blogs");
             Console.WriteLine(" 3) Remove Blog");
@@ -53,7 +55,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     AddTag();
                     break;
                 case 0:
-
+                    return _parentUI;
                     break;
             }
 
