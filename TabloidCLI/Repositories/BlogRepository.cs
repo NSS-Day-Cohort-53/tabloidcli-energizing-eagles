@@ -149,6 +149,24 @@ namespace TabloidCLI.Repositories
                 }
             }
         }
+
+        public void AddTagToBlog(int blogId, int tagId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO BlogTag (BlogId, TagId)
+                                         VALUES (@blogId, @tagId)";
+                    cmd.Parameters.AddWithValue("@blogId", blogId);
+                    cmd.Parameters.AddWithValue("@tagId", tagId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
         
     }
 }
