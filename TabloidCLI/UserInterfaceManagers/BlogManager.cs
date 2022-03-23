@@ -159,7 +159,10 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void AddTag ()
         {
-            Show();
+            foreach (Blog blog in _blogRepository.GetAll())
+            {
+                Console.WriteLine($"{blog.Id}: {blog.Title}");
+            }
             Console.Write("Select the blog you wish to add a tag to: ");
             int blogId = int.Parse(Console.ReadLine());
 
@@ -167,7 +170,7 @@ namespace TabloidCLI.UserInterfaceManagers
             List<Tag> tags = _tagRepository.GetAll();
             foreach (Tag tag in tags)
             {
-                Console.WriteLine(tag);
+                Console.WriteLine($"Id: {tag.Id}  Name:{tag.Name}");
             }
             Console.Write("Select a tag to apply: ");
             int tagId = int.Parse(Console.ReadLine());
