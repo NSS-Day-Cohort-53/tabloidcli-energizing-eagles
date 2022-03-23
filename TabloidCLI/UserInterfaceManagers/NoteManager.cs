@@ -37,8 +37,6 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine("3) Delete note ");
             Console.WriteLine("0) Go back ");
 
-
-
             string choice = Console.ReadLine();
 
             switch (choice)
@@ -61,8 +59,7 @@ namespace TabloidCLI.UserInterfaceManagers
         }
         private void ListNotes()
         {
-
-            List<Note> notes = _noteRepository.GetAll();
+           List<Note> notes = _noteRepository.GetAll();
 
             foreach (Note note in notes)
             {
@@ -72,7 +69,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void AddNotes()
         {
-            Console.WriteLine("what post you like to put a note on!");
+            Console.WriteLine("Which post you like to put a note on!");
             List<Post> posts = _postRepository.GetAll();
             foreach (Post post in posts)
             {
@@ -98,7 +95,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void DeleteNote()
         {
-            Console.WriteLine("what post you like to a remove your note  on!");
+            Console.WriteLine("Which post you like to a remove your note on!");
             List<Post> posts = _postRepository.GetAll();
             foreach (Post post in posts)
             {
@@ -114,7 +111,7 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             int noteId = int.Parse(Console.ReadLine());
             _noteRepository.Delete(noteId);
-            Console.WriteLine("note deleted!");
+            Console.WriteLine("Note deleted!");
         }
 
     }
