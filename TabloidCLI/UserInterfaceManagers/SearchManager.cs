@@ -111,16 +111,22 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine($"No results for {tagName}");
             }
-            else if (!postResults.NoResultsFound)
+            if (!postResults.NoResultsFound)
             {
+                Console.WriteLine("Post Results");
+                Console.WriteLine();
                 postResults.Display();
             }
-            else if (!blogResults.NoResultsFound)
+            if (!blogResults.NoResultsFound)
             {
+                Console.WriteLine("Blog Results");
+                Console.WriteLine();
                 blogResults.Display();
             }
-            else if (!authorResults.NoResultsFound)
+            if (!authorResults.NoResultsFound)
             {
+                Console.WriteLine("Author Results");
+                Console.WriteLine();
                 authorResults.Display();
             }
         }
