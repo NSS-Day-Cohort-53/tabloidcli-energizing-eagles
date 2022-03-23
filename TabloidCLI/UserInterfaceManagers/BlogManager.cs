@@ -12,12 +12,14 @@ namespace TabloidCLI.UserInterfaceManagers
     {
         private readonly IUserInterfaceManager _parentUI;
         private BlogRepository _blogRepository;
+        private TagRepository _tagRepository;
         private string _connectionString;
         public BlogManager(IUserInterfaceManager parentUI, string connectionString) 
         {
             _parentUI = parentUI;
             _blogRepository = new BlogRepository(connectionString);
             _connectionString = connectionString;
+            _tagRepository = new TagRepository(connectionString);
         }
 
 
@@ -28,6 +30,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 2) View Blogs");
             Console.WriteLine(" 3) Remove Blog");
             Console.WriteLine(" 4) Edit Blog");
+            Console.WriteLine(" 5) Add tag to blog");
             Console.WriteLine(" 0) Go Back");
 
             int menuOp = int.Parse(Console.ReadLine());
@@ -45,6 +48,9 @@ namespace TabloidCLI.UserInterfaceManagers
                     break;
                 case 4:
                     Edit();
+                    break;
+                case 5:
+                    AddTag();
                     break;
                 case 0:
 
@@ -142,6 +148,27 @@ namespace TabloidCLI.UserInterfaceManagers
             }
             
             _blogRepository.Update(blogToEdit.Id, blogToEdit.Title, blogToEdit.Url);
+
+        }
+
+        private void AddTag ()
+        {
+            Show();
+            Console.Write("Select the blog you wish to add a tag to: ");
+            int blogId = int.Parse(Console.ReadLine());
+
+            
+            List<Tag> tags = _tagRepository.GetAll();
+            foreach (Tag tag in tags)
+            {
+                Console.WriteLine(tag);
+            }
+            Console.Write("Select a tag to apply: ");
+            int tagId = int.Parse(Console.ReadLine());
+
+            _blogRepository.AddTagToBlog(blogId, tagId);
+
+
 
         }
     }
