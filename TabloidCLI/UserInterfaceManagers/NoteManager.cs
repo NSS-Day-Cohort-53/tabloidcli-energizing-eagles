@@ -33,6 +33,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine("1) List Notes");
             Console.WriteLine("2) Add Note");
             Console.WriteLine("3) Delete note ");
+            Console.WriteLine("0) Go back ");
 
 
 
@@ -95,7 +96,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void DeleteNote()
         {
-            Console.WriteLine("what post you  like to put a remove your note  on!");
+            Console.WriteLine("what post you like to a remove your note  on!");
             List<Post> posts = _postRepository.GetAll();
             foreach (Post post in posts)
             {
