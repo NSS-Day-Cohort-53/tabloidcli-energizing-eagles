@@ -55,7 +55,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     AddTag();
                     break;
                 case 0:
-
+                    return _parentUI;
                     break;
             }
 
