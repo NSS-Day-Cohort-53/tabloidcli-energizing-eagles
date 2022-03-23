@@ -19,7 +19,9 @@ namespace TabloidCLI.UserInterfaceManagers
         // runs menu and options / Incomplete need to add to switch
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine("------------");
             Console.WriteLine("Search Menu");
+            Console.WriteLine("------------");
             Console.WriteLine(" 1) Search Blogs");
             Console.WriteLine(" 2) Search Authors");
             Console.WriteLine(" 3) Search Posts");
