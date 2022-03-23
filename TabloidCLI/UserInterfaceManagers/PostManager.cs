@@ -17,7 +17,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private BlogRepository _blogRepository;
         private NoteRepository _noteRepository;
         private string _connectionString;
-
+        
         // sets the previously mentioned field
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
         {
@@ -25,10 +25,12 @@ namespace TabloidCLI.UserInterfaceManagers
             _postRepository = new PostRepository(connectionString);
             _authorRepository = new AuthorRepository(connectionString);
             _blogRepository = new BlogRepository(connectionString);
-            _noteRepository = new NoteRepository(connectionString);
             _connectionString = connectionString;
         }
+
         // displays and runs menu for the posts // needs to be worked on switch empty
+       
+
         public IUserInterfaceManager Execute()
         {
             Console.WriteLine("Post Menu");
@@ -73,7 +75,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     return this;
             }
         }
-        // needs to be worked on
+        
         private void List()
         {
             List<Post> posts = _postRepository.GetAll();
@@ -232,67 +234,13 @@ namespace TabloidCLI.UserInterfaceManagers
             throw new NotImplementedException();
         }
 
-        private IUserInterfaceManager NoteManagement()
-        {
-            Console.WriteLine("Note Menu");
-            Console.WriteLine("1) List Notes");
-            Console.WriteLine("2) Add Note");
-            string choice = Console.ReadLine();
-            switch (choice)
-            {
-                case "1":
-                    ListNotes();
-                    return this;
-                case "2":
-                    AddNotes();
-                    return this;
-                default:
-                    Console.WriteLine("Invalid Selection");
-                    return this;
+        
+    }
+  
 
+       
 
-
-            }
-            
-            
-                
-        }
-        private void ListNotes()
-        {
-
-            List<Note> notes = _noteRepository.GetAll();
-
-            foreach (Note note in notes)
-            {
-                Console.WriteLine($"Title:{note.Title}  created on {note.CreateDateTime} Content: {note.Content}");
-            }
-        }
-
-        private void AddNotes()
-        {
-            Console.WriteLine("what post you  like to put a note on!");
-            List<Post> posts = _postRepository.GetAll();
-            foreach (Post post in posts)
-            {
-                Console.WriteLine($"{post.Id}) {post.Title}");
-            }
-           int PostId=int.Parse(Console.ReadLine());
-
-
-            Console.WriteLine("Add a note to a post!");
-            Note n = new Note();
-
-            Console.Write("Title: ");
-            n.Title = Console.ReadLine();
-            n.CreateDateTime = DateTime.Now;
-            Console.Write("Content: ");
-            n.Content = Console.ReadLine();
-            n.PostId=PostId;
-           
-
-            _noteRepository.Insert(n);
-
-        }
+       
 
     }
-}
+
