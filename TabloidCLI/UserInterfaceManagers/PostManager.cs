@@ -226,7 +226,57 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Edit()
         {
-            throw new NotImplementedException();
+            Post postEdited = Choose("Which post would you like to edit?");
+            if (postEdited == null)
+            {
+                return;
+            }
+
+            Console.WriteLine();
+            Console.Write("New Title (blank to leave unchanged): ");
+            string title = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                postEdited.Title = title;
+            }
+
+            Console.Write("New Url (blank to leave unchanged): ");
+            string url = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                postEdited.Url = url;
+            }
+
+
+            bool success = false;
+            DateTime publishDate;
+            string publishedDate = "";
+            do
+            {
+                Console.Write("New Publish Date (e.g. 1/1/2022) (blank to leave unchanged): ");
+                publishedDate = Console.ReadLine();
+                success = DateTime.TryParse(publishedDate, out publishDate);
+            }
+            while (!success && !string.IsNullOrWhiteSpace(publishedDate));
+            if (!string.IsNullOrWhiteSpace(publishedDate))
+            {
+                postEdited.PublishDateTime = publishDate;
+            }
+
+            Author chosenAuthor = ChooseAuthor("Choose new author (blank to leave unchanged): ");
+            if (chosenAuthor != null)
+            {
+                postEdited.Author = chosenAuthor;
+            }
+
+            Blog chosenBlog = ChooseBlog("Which blog does this post belong to? (blank to leave unchanged): ");
+            if (chosenBlog != null)
+            {
+                postEdited.Blog = chosenBlog;
+            }
+            postEdited.Blog = chosenBlog;
+
+            _postRepository.Update(postEdited);
         }
 
         private void Remove()
