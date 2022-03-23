@@ -163,7 +163,7 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine($"{blog.Id}: {blog.Title}");
             }
-            Console.Write("Select the blog you wish to add a tag to: ");
+            Console.Write("Select the blog id number you wish to add a tag to: ");
             int blogId = int.Parse(Console.ReadLine());
 
             
@@ -172,7 +172,7 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine($"Id: {tag.Id}  Name:{tag.Name}");
             }
-            Console.Write("Select a tag to apply: ");
+            Console.Write("Select a tag id number to apply: ");
             int tagId = int.Parse(Console.ReadLine());
 
             _blogRepository.AddTagToBlog(blogId, tagId);
