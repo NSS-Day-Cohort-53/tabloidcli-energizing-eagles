@@ -69,7 +69,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void AddNotes()
         {
-            Console.WriteLine("what post you  like to put a note on!");
+            Console.WriteLine("what post you like to put a note on!");
             List<Post> posts = _postRepository.GetAll();
             foreach (Post post in posts)
             {
