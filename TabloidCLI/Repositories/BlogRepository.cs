@@ -65,6 +65,35 @@ namespace TabloidCLI.Repositories
                 }
             }
         }
+        public Blog GetById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, 
+                                               Title,
+                                               URL
+                                        FROM Blog WHERE Blog.Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    Blog blog = null;
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        blog = new Blog
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            Url = reader.GetString(reader.GetOrdinal("URL"))
+                        };
+                    }
+                    reader.Close();
+                    return blog;
+                }
+            }
+        }
 
         public void Delete(int id)
         {

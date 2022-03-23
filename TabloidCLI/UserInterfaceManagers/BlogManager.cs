@@ -77,8 +77,14 @@ namespace TabloidCLI.UserInterfaceManagers
         {
            foreach(Blog blog in _blogRepository.GetAll())
             {
-                Console.WriteLine($"{blog.Id}:  {blog.Title} has a url of {blog.Url}");
+                Console.WriteLine($"{blog.Id}: {blog.Title}");
             }
+            Console.Write("Select a Blog Id that you would like to see: ");
+            int selectedBlogId = int.Parse(Console.ReadLine());
+            Blog selectedBlog = _blogRepository.GetById(selectedBlogId);
+            Console.WriteLine("------------------------------------------------------------------");
+            Console.WriteLine($"{selectedBlog.Id}) {selectedBlog.Title} || URL:{selectedBlog.Url}");
+            Console.WriteLine("------------------------------------------------------------------");
         }
 
         private void DeleteById()
