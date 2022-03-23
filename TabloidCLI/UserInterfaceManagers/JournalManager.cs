@@ -20,7 +20,9 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine("------------");
             Console.WriteLine("Journal Menu");
+            Console.WriteLine("------------");
 
             Console.WriteLine(" 1) List Journals");
             Console.WriteLine(" 2) Journal Details");
@@ -71,19 +73,19 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Journal> journals = _journalRepository.GetAll();
-            Console.WriteLine("----------------------------");
             foreach (Journal journal in journals)
             {
+                Console.WriteLine("----------------------------");
                 Console.WriteLine($"{journal.Id}.) {journal.Title}");
+                Console.WriteLine("----------------------------");
             }
-            Console.WriteLine("----------------------------");
         }
 
         private Journal Choose(string prompt = null)
         {
             if (prompt == null)
             {
-                prompt = "Please choose a Journal:";
+                prompt = "Please choose a Journal Id:";
             }
 
             Console.WriteLine(prompt);
@@ -124,6 +126,9 @@ namespace TabloidCLI.UserInterfaceManagers
             j.CreateDateTime = DateTime.Today;
 
             _journalRepository.Insert(j);
+            Console.WriteLine("------------------------");
+            Console.WriteLine("Journal has been added!");
+            Console.WriteLine("------------------------");
         }
 
         private void Edit()
@@ -158,7 +163,9 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 _journalRepository.Delete(journalToDelete.Id);
             }
-
+            Console.WriteLine("*******************************");
+            Console.WriteLine($"{journalToDelete.Title} has been deleted.");
+            Console.WriteLine("*******************************");
         }
     }
 }

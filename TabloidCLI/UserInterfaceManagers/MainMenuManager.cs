@@ -9,7 +9,9 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine("---------");
             Console.WriteLine("Main Menu");
+            Console.WriteLine("---------");
 
             Console.WriteLine(" 1) Journal Management");
             Console.WriteLine(" 2) Blog Management");
@@ -17,7 +19,9 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 4) Post Management");
             Console.WriteLine(" 5) Tag Management");
             Console.WriteLine(" 6) Search by Tag");
-            Console.WriteLine(" 0) Exit");
+            Console.WriteLine();
+            Console.WriteLine("||**** 0) Exit ****||");
+            Console.WriteLine();
 
             Console.Write("> ");
             string choice = Console.ReadLine();
