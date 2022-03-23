@@ -8,8 +8,11 @@ namespace TabloidCLI.Repositories
 {
     public class NoteRepository : DatabaseConnector, IRepository<Note>
     {
-        public NoteRepository(string connectionString) : base(connectionString)
-        {   }
+        private int _postId;
+        public NoteRepository(int postId, string connectionString) : base(connectionString)
+        {
+            _postId = postId;
+        }
         public List<Note> GetAll()
         {
             using (SqlConnection conn = Connection)
