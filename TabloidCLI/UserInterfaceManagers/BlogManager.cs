@@ -78,6 +78,18 @@ namespace TabloidCLI.UserInterfaceManagers
             Blog selectedBlog = _blogRepository.GetById(selectedBlogId);
             Console.WriteLine("------------------------------------------------------------------");
             Console.WriteLine($"{selectedBlog.Id}) {selectedBlog.Title} || URL:{selectedBlog.Url}");
+            if (selectedBlog.Tags.Count > 0)
+            {
+                Console.Write("Tags: ");
+                foreach (Tag tag in selectedBlog.Tags)
+                {
+                    Console.WriteLine(" " + tag.Name);
+                }
+            }
+            else
+            {
+                Console.WriteLine("This blog has no tags yet!");
+            }
             Console.WriteLine("------------------------------------------------------------------");
         }
 
