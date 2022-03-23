@@ -49,8 +49,8 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "Delete FROM Note (Id,PostId)values(@Id,@postId)";
-                    
+                    cmd.CommandText = @"Delete FROM Note WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }

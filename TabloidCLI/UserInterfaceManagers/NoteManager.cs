@@ -100,8 +100,23 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void DeleteNote()
         {
+            Console.WriteLine("what post you  like to put a remove your note  on!");
+            List<Post> posts = _postRepository.GetAll();
+            foreach (Post post in posts)
+            {
+                Console.WriteLine($"{post.Id}) {post.Title}");
+            }
+            int PostId = int.Parse(Console.ReadLine());
 
-            throw new NotImplementedException();
+            List<Note> notes = _noteRepository.GetAll();
+
+            foreach (Note note in notes)
+            {
+                Console.WriteLine($"Id:{note.Id} Title:{note.Title} created on {note.CreateDateTime} Content: {note.Content}");
+            }
+            int noteId = int.Parse(Console.ReadLine());
+            _noteRepository.Delete(noteId);
+            Console.WriteLine("note deleted!");
         }
 
     }
