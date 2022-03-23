@@ -233,14 +233,14 @@ namespace TabloidCLI.UserInterfaceManagers
             }
 
             Console.WriteLine();
-            Console.Write("New Title (blank to leave unchanged): ");
+            Console.Write("New Title (Leave blank to not change): ");
             string title = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(title))
             {
                 postEdited.Title = title;
             }
 
-            Console.Write("New Url (blank to leave unchanged): ");
+            Console.Write("New Url (Leave blank to not change): ");
             string url = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(url))
             {
@@ -253,7 +253,7 @@ namespace TabloidCLI.UserInterfaceManagers
             string publishedDate = "";
             do
             {
-                Console.Write("New Publish Date (e.g. 1/1/2022) (blank to leave unchanged): ");
+                Console.Write("New Publish Date (e.g. 1/1/2022) (Leave blank to not change): ");
                 publishedDate = Console.ReadLine();
                 success = DateTime.TryParse(publishedDate, out publishDate);
             }
@@ -263,13 +263,13 @@ namespace TabloidCLI.UserInterfaceManagers
                 postEdited.PublishDateTime = publishDate;
             }
 
-            Author chosenAuthor = ChooseAuthor("Choose new author (blank to leave unchanged): ");
+            Author chosenAuthor = ChooseAuthor("Choose new author (Leave blank to not change): ");
             if (chosenAuthor != null)
             {
                 postEdited.Author = chosenAuthor;
             }
 
-            Blog chosenBlog = ChooseBlog("Which blog does this post belong to? (blank to leave unchanged): ");
+            Blog chosenBlog = ChooseBlog("Which blog does this post belong to? (Leave blank to not change): ");
             if (chosenBlog != null)
             {
                 postEdited.Blog = chosenBlog;
@@ -281,10 +281,11 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Remove()
         {
-            throw new NotImplementedException();
+            Post postDeleted = Choose("What post do you want to delete?");
+            _postRepository.Delete(postDeleted.Id);
         }
 
-        
+
     }
   
 
