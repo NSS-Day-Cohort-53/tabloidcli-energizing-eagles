@@ -63,7 +63,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine($"Publication Date: {post.PublishDateTime}");
             Console.WriteLine($"Author: {post.Author.FullName}");
             Console.WriteLine($"Blog: {post.Blog.Title}");
-            Console.WriteLine("Tags:");
+            Console.WriteLine("Tags: ");
             foreach (Tag tag in post.Tags)
             {
                 Console.WriteLine(" " + tag);
@@ -89,7 +89,7 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 int choice = int.Parse(input);
                 Tag tag = tags[choice - 1];
-                _postRepository.Insert(post, tag);
+                _postRepository.InsertTag(post, tag);
             }
             catch (Exception)
             {
@@ -115,7 +115,7 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 int choice = int.Parse(input);
                 Tag tag = tags[choice - 1];
-                _postRepository.Delete(post.Id, tag.Id);
+                _postRepository.DeleteTag(post.Id, tag.Id);
             }
             catch (Exception)
             {

@@ -17,13 +17,13 @@ namespace TabloidCLI.UserInterfaceManagers
         private NoteRepository _noteRepository;
         private string _connectionString;
 
-        public NoteManager(IUserInterfaceManager parentUI, string connectionString)
+        public NoteManager(IUserInterfaceManager parentUI, string connectionString, int postId)
         {
             _parentUI = parentUI;
             _postRepository = new PostRepository(connectionString);
             _authorRepository = new AuthorRepository(connectionString);
             _blogRepository = new BlogRepository(connectionString);
-            _noteRepository = new NoteRepository(connectionString);
+            _noteRepository = new NoteRepository(postId, connectionString);
             _connectionString = connectionString;
         }
         //public NoteRepository(string connectionString) : base(connectionString) { }
@@ -49,11 +49,6 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "3":
                     DeleteNote();
                     return this;
-
-                case "5":
-                    return new NoteManager(this, _connectionString);
-
-
                 case "0":
                     return _parentUI;
                 default:
