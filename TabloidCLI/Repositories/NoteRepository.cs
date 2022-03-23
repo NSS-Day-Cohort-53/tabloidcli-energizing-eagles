@@ -44,7 +44,18 @@ namespace TabloidCLI.Repositories
         }
             public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "Delete FROM Note (Id,PostId)values(@Id,@postId)";
+                    
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+
         }
 
         public Note Get(int id)
