@@ -31,6 +31,8 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 3) Remove Blog");
             Console.WriteLine(" 4) Edit Blog");
             Console.WriteLine(" 5) Add tag to blog");
+            Console.WriteLine(" 6) Remove tag from blog");
+            Console.WriteLine(" 7) View blog's posts");
             Console.WriteLine(" 0) Go Back");
 
             int menuOp = int.Parse(Console.ReadLine());
@@ -52,8 +54,11 @@ namespace TabloidCLI.UserInterfaceManagers
                 case 5:
                     AddTag();
                     break;
+                case 6:
+                    RemoveTagFromBlog();
+                    break;
                 case 0:
-
+                    test();
                     break;
             }
 
@@ -187,10 +192,75 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("Select a tag id number to apply: ");
             int tagId = int.Parse(Console.ReadLine());
 
+           Tag SelectedTag =tags.Find(t => t.Id == tagId);
+
             _blogRepository.AddTagToBlog(blogId, tagId);
 
 
 
+        }
+
+        private void RemoveTagFromBlog()
+        {
+            //obtain amount 
+            int blogCount = _blogRepository.GetAll().Count();
+
+            foreach (int i in _blogRepository.blogIds())
+            {
+                    Blog selectedBlog = _blogRepository.GetById(i );
+                if (selectedBlog != null)
+                {
+                    Console.WriteLine("------------------------------------------------------------------");
+                    Console.WriteLine($"{selectedBlog.Id}) {selectedBlog.Title} || URL:{selectedBlog.Url}");
+                    if (selectedBlog.Tags.Count > 0)
+                    {
+                        Console.Write("Tags: ");
+                        foreach (Tag tag in selectedBlog.Tags)
+                        {
+                            Console.WriteLine(" " + tag.Name);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("This blog has no tags yet!");
+                    }
+                    Console.WriteLine("------------------------------------------------------------------");
+                }
+
+            }
+
+            Console.Write("\n\nSelect the Id of a blog that you want to remove a tag from: ");
+            int blogId = int.Parse(Console.ReadLine());
+
+            // now need to display a blog and its tags
+            Blog selectBlog = _blogRepository.GetById(blogId);
+            Console.WriteLine("------------------------------------------------------------------");
+            Console.WriteLine($"{selectBlog.Id}) {selectBlog.Title} || URL:{selectBlog.Url}");
+            if (selectBlog.Tags.Count > 0)
+            {
+                Console.Write("Tags: ");
+                foreach (Tag tag in selectBlog.Tags)
+                {
+                    Console.WriteLine($"\n{tag.Id})  {tag.Name}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("This blog has no tags yet!");
+            }
+            Console.WriteLine("------------------------------------------------------------------");
+
+            Console.Write("Select a tag id to delete from this blog: ");
+            int TagId = int.Parse(Console.ReadLine());
+
+            int blogTagId =_blogRepository.SelectBlogTagId(TagId, selectBlog.Id);
+
+            _blogRepository.DeleteTagFromBlog(blogTagId);
+        }
+
+        private void test()
+        {
+            Console.Write(_blogRepository.AmountOfObjects());
         }
     }
 }
