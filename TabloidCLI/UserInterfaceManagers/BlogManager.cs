@@ -61,7 +61,6 @@ namespace TabloidCLI.UserInterfaceManagers
                     break;
                 case 0:
                     return _parentUI;
-                    break;
             }
 
             return this;
@@ -260,9 +259,6 @@ namespace TabloidCLI.UserInterfaceManagers
             _blogRepository.DeleteTagFromBlog(blogTagId);
         }
 
-        private void test()
-        {
-            Console.Write(_blogRepository.AmountOfObjects());
-        }
+        
     }
 }
