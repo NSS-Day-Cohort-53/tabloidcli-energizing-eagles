@@ -22,7 +22,9 @@ namespace TabloidCLI.UserInterfaceManagers
         // displays and runs menu for the tags // needs to be worked on switch empty
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine("---------");
             Console.WriteLine("Tag Menu");
+            Console.WriteLine("---------");
             Console.WriteLine(" 1) List Tags");
             Console.WriteLine(" 2) Add Tag");
             Console.WriteLine(" 3) Edit Tag");

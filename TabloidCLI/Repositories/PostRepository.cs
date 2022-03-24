@@ -201,7 +201,60 @@ namespace TabloidCLI.Repositories
 
         public void Update(Post post)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    if (post.Author != null && post.Blog != null)
+                    {
+                        cmd.CommandText = @"UPDATE Post
+                                            SET Title = @title,
+                                                Url = @url,
+                                                PublishDateTime = @publishDate,
+                                                AuthorId = @authorId,
+                                                BlogId = @blogId
+                                            WHERE Id = @id";
+                        cmd.Parameters.AddWithValue("@authorId", post.Author.Id);
+                        cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);
+                    }
+                    else if (post.Author == null && post.Blog != null)
+                    {
+                        cmd.CommandText = @"UPDATE Post
+                                            SET Title = @title,
+                                                Url = @url,
+                                                PublishDateTime = @publishDate,
+                                                BlogId = @blogId
+                                            WHERE Id = @id";
+                        cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);
+                    }
+                    else if (post.Author != null && post.Blog == null)
+                    {
+                        cmd.CommandText = @"UPDATE Post
+                                            SET Title = @title,
+                                                Url = @url,
+                                                PublishDateTime = @publishDate,
+                                                AuthorId = @authorId
+                                            WHERE Id = @id";
+                        cmd.Parameters.AddWithValue("@authorId", post.Author.Id);
+                    }
+                    else
+                    {
+                        cmd.CommandText = @"UPDATE Post
+                                            SET Title = @title,
+                                                Url = @url,
+                                                PublishDateTime = @publishDate
+                                            WHERE Id = @id";
+                    }
+                    cmd.Parameters.AddWithValue("@title", post.Title);
+                    cmd.Parameters.AddWithValue("@url", post.Url);
+                    cmd.Parameters.AddWithValue("@publishDate", post.PublishDateTime);
+                    cmd.Parameters.AddWithValue("@id", post.Id);
+
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void Delete(int id)
@@ -211,8 +264,9 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"DELETE FROM Post
-                                         WHERE Id = @id";
+                    cmd.CommandText = @"DELETE FROM Note WHERE PostId = @id;
+                                        DELETE FROM PostTag WHERE PostId = @id;
+                                        DELETE FROM Post WHERE id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();

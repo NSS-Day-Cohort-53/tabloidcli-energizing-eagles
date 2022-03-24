@@ -32,9 +32,9 @@ namespace TabloidCLI.UserInterfaceManagers
 
             foreach (T result in _results)
             {   
-                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine(" " + result);
-                Console.WriteLine("-----------------------------------");
+                Console.WriteLine("-------------------------------------------------------------------------------");
             }
 
             Console.WriteLine();
