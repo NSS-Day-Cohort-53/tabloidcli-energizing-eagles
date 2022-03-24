@@ -15,6 +15,7 @@ namespace TabloidCLI.Repositories
         public string Title { set; get; }
         public string Url { get; set; }
 
+        // adds a new object to the blog table (title and url)
         public void insert(Blog blog)
         {
             using (SqlConnection conn = Connection)
@@ -72,6 +73,7 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
+                    // gets blogs and their associated tag names and tag ids
                     cmd.CommandText = @"SELECT b.Id, 
                                                b.Title,
                                                b.URL,
@@ -84,10 +86,10 @@ namespace TabloidCLI.Repositories
                     cmd.Parameters.AddWithValue("@id", id);
 
                     Blog blog = null;
-                    List<string> tags = new List<string>();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
+                        // if the blog is unassigned provide its id, title, and url values
                         if (blog == null)
                         {
                             blog = new Blog()
@@ -98,6 +100,7 @@ namespace TabloidCLI.Repositories
                             };
                         }
 
+                        // if tag id is not empty, append the current tag into its tag list
                         if (!reader.IsDBNull(reader.GetOrdinal("TagId")))
                         {
                             blog.Tags.Add(new Tag()
@@ -150,6 +153,7 @@ namespace TabloidCLI.Repositories
             }
         }
 
+        // this one adds a new object to the blog tag table
         public void AddTagToBlog(int blogId, int tagId)
         {
             using (SqlConnection conn = Connection)
@@ -167,6 +171,96 @@ namespace TabloidCLI.Repositories
                 }
             }
         }
+
+        public int AmountOfObjects()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"select Count(Id) AS 'count' from Blog";
+
+                    int count=0;
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        count = reader.GetInt32(reader.GetOrdinal("count"));
+                    }
+                   // Console.WriteLine($"{count}");
+                    return count;
+                }
+            }
+        }
         
+        public List<int> blogIds()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"select Id from Blog";
+
+                    List<int> ids = new List<int>();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ids.Add(reader.GetInt32(reader.GetOrdinal("Id")));
+                    }
+                    // Console.WriteLine($"{count}");
+                    return ids;
+                }
+            }
+
+        }
+
+        public void DeleteTagFromBlog(int id)
+        {
+            using (SqlConnection connection = Connection)
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM BlogTag where Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public int SelectBlogTagId(int tagId, int blogId)
+        {
+            using (SqlConnection connection = Connection)
+            {
+                connection.Open();
+
+                using (SqlCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = @"Select Id from BlogTag where BlogId = @blogId and TagId= @tagId";
+                    cmd.Parameters.AddWithValue("@blogId", blogId);
+                    cmd.Parameters.AddWithValue("@tagId", tagId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        int btId=0;
+                        while (reader.Read())
+                        {
+                             btId = reader.GetInt32(reader.GetOrdinal("Id"));
+                        }
+                        return btId;
+
+                    }
+
+
+                    
+                }
+            }
+
+        }
     }
 }
